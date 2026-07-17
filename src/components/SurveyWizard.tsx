@@ -49,12 +49,6 @@ const QUESTIONS = [
     type: 'textarea',
     required: false,
     placeholder: 'Share your experience...',
-  },
-  {
-    id: 'contactInfo',
-    title: 'Almost done! Please provide your details.',
-    type: 'contact',
-    required: true,
   }
 ];
 
@@ -67,18 +61,12 @@ export function SurveyWizard({ onSubmit, isSubmitting = false }: SurveyWizardPro
     readingStrategy: '',
     recallPractice: '',
     failedStudyStrategy: '',
-    name: '',
-    whatsapp: '',
-    email: '',
   });
 
   const question = QUESTIONS[currentStep];
   const progress = Math.round((currentStep / QUESTIONS.length) * 100);
 
   const isCurrentStepValid = () => {
-    if (question.type === 'contact') {
-      return formData.name.trim() !== '' && formData.whatsapp.trim() !== '' && formData.email.trim() !== '';
-    }
     if (question.required) {
       const value = formData[question.id as keyof SurveyResponses];
       return value !== undefined && value.trim() !== '';
@@ -127,10 +115,10 @@ export function SurveyWizard({ onSubmit, isSubmitting = false }: SurveyWizardPro
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 leading-tight">
             {question.title}
           </h2>
-          {!question.required && question.type !== 'contact' && (
+          {!question.required && (
             <p className="text-gray-400 mb-8 font-medium">Optional</p>
           )}
-          {question.required && question.type !== 'contact' && (
+          {question.required && (
             <p className="text-blue-500 mb-8 font-medium text-sm">Required</p>
           )}
 
@@ -168,44 +156,6 @@ export function SurveyWizard({ onSubmit, isSubmitting = false }: SurveyWizardPro
                 placeholder={question.placeholder}
                 className="w-full rounded-xl border-2 border-gray-100 shadow-sm focus:border-blue-600 focus:ring-0 bg-white p-4 text-lg resize-none transition-colors"
               />
-            )}
-
-            {question.type === 'contact' && (
-              <div className="space-y-5 animate-in fade-in duration-300">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => handleChange('name', e.target.value)}
-                    className="w-full rounded-xl border-2 border-gray-100 shadow-sm focus:border-blue-600 focus:ring-0 p-3 text-lg transition-colors"
-                    placeholder="John Doe"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">WhatsApp Number *</label>
-                  <input
-                    type="tel"
-                    value={formData.whatsapp}
-                    onChange={(e) => handleChange('whatsapp', e.target.value)}
-                    className="w-full rounded-xl border-2 border-gray-100 shadow-sm focus:border-blue-600 focus:ring-0 p-3 text-lg transition-colors"
-                    placeholder="+1234567890"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleChange('email', e.target.value)}
-                    className="w-full rounded-xl border-2 border-gray-100 shadow-sm focus:border-blue-600 focus:ring-0 p-3 text-lg transition-colors"
-                    placeholder="john@example.com"
-                    required
-                  />
-                </div>
-              </div>
             )}
           </div>
         </div>

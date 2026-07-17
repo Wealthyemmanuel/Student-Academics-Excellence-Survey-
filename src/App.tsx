@@ -25,9 +25,6 @@ export default function App() {
       formData.append('entry.848453584', responses.readingStrategy);
       formData.append('entry.156699759', responses.recallPractice);
       formData.append('entry.1704821583', responses.failedStudyStrategy);
-      formData.append('entry.1149590998', responses.name);
-      formData.append('entry.1002137704', responses.whatsapp);
-      formData.append('entry.1494517004', responses.email);
 
       await fetch(
         'https://docs.google.com/forms/d/e/1FAIpQLSffjJVi5SN_7IKJQCtQ8TDqOjRBt8lJPS0vZxRe38LgQsv4wQ/formResponse',

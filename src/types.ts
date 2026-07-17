@@ -5,7 +5,4 @@ export interface SurveyResponses {
   readingStrategy: string;
   recallPractice: string;
   failedStudyStrategy: string;
-  name: string;
-  whatsapp: string;
-  email: string;
 }
